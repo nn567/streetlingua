@@ -1,53 +1,24 @@
 <!DOCTYPE html>
 <!-- saved from url=(0036)http://localhost/www/page-d-exemple/ -->
 <html lang="fr-CA"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <body>
 
 <?php include "barre_navigation.php";?>
 	
-
-	
 <div id="content" class="site-content">
 	<div class="container" style="min-height: 1px; margin-right: 60px;">
 				
-				<div id="primary" class="content-area">
-			<main itemscope="" itemtype="http://schema.org/WebPageElement" itemprop="mainContentOfPage" id="main" class="site-main">
-				
-
-<div class="row">
-<div class="col-md-12">
-
-</div>
-	
-
+		<div id="primary" class="content-area">
 
 <?php
 
-$connexion = mysqli_connect('localhost', 'user', 'password', 'wp_database');
-
-
 //barre de recherche pour trouver des annonces qui nous correspond 	
 
- if (isset($_GET["usr"]))
-	   //echo 'succes login'; 
-	   $usr = $_GET["usr"];
-	   
-
- if (isset($_GET["c"]))
-	   //echo 'succes login'; 
-	   $c = $_GET["c"]; 
    
  if (isset($_POST["chercher"])){
 	 
-	 $lieu = mysqli_real_escape_string($connexion, $_POST['lieu']);
-	 
+	 $lieu = mysqli_real_escape_string($connexion, $_POST['lieu']);	 
 	 $requete="select ID_exp, exp_sujet, exp_langue, exp_theme_id, exp_lieu_nom, exp_lieu_add, exp_lieu_ville, exp_description, exp_prix, exp_nb_participants, exp_dispo_id from wp_exp where exp_lieu_ville=\"$lieu\"";
      $res=mysqli_query($connexion, $requete);
 	
@@ -82,7 +53,6 @@ $connexion = mysqli_connect('localhost', 'user', 'password', 'wp_database');
 
 //$requete1="select wp_connexion.ID_user from wp_connexion inner join wp_users on wp_users.ID=wp_connexion.ID_user where wp_users.user_login=\"$usr\"";
 //$resultat1=mysqli_query($connexion,$requete1);
-
 
 
 $j = 0;
@@ -144,7 +114,7 @@ for ($j = 0; $j<3; $j++)
 			$user = "<?php echo $usr; ?>";
 			$c = "<?php echo $c; ?>";
 			if ($.isNumeric($id)){
-			window.location.href = "voir_annonce.php?w1=" + $id + "&c=" + $c;
+			window.location.href = "voir_annonce.php?w1=" + $id;
 			}
 		  });
 		});

@@ -1,4 +1,6 @@
 <?php
+
+
 global $_SESSION;
 /*function ajouterActiviteSession($nouvelleActivite) {
 		$_SESSION['activite'][] = date("Y-m-d H:i:s").' : '.$nouvelleActivite;
@@ -28,29 +30,13 @@ if (isset($_POST['valider']))
 		if (($row['user_pass']) == md5($_POST['password'])) // Acces OK !
 		{
 
-			$usr=$row['user_login'];
+			session_start();
+			$_SESSION['login']=$pseudo;
+						
+			//if (isset($_SESSION['login'])){
+			//echo '<script> alert("marche pas"); </script>';
 			
-			//on regarde si l'utilisateur existe deja dans la base des connexions, on enregistre la date de connexion
-			//sinon on le rajoute dans le tableau 
 			
-			$requete1="select wp_connexion.ID_user from wp_connexion inner join wp_users on wp_users.ID=wp_connexion.ID_user where wp_users.user_login=\"$usr\"";
-			$resultat1=mysqli_query($connexion,$requete1);
-			
-			if (mysqli_num_rows($resultat1)>0) 
-			{
-				$row1=mysqli_fetch_assoc($resultat1);
-				$id=$row1['ID_user'];
-				$req = "update wp_connexion set connexion=NOW(), etat=true where ID_user =\"$id\"";
-				$insertion=mysqli_query($connexion,$req);
-				if (!$insertion) echo '<script>alert("erreur update connexion");</script>';
-			} 
-			else 
-			{	
-				$requete3="insert into wp_connexion(ID_user, connexion, etat) values ('".$id_usr."', NOW(), true)";
-				$resultat3=mysqli_query($connexion,$requete3);
-				if (!$resultat3) echo '<script>alert("erreur update connexion");</script>';
-			}
-			//echo  $_SESSION['login'];
 			//header("location: index.php?page=index1.php");
 			//$message = '<p>Connexion reussie</p>';
 			
@@ -58,11 +44,11 @@ if (isset($_POST['valider']))
 			
 			if ($row['user_type']=='mentor') echo '
 				<script type="text/javascript">
-			window.location = "./tableau_de_bord.php?usr='.$usr.'"</script>';
+			window.location = "./tableau_de_bord.php?usr='.$_SESSION['login'].'"</script>';
 			
 			if ($row['user_type']=='apprenti') echo '
 				<script type="text/javascript">
-			window.location = "./tableau_de_bord.php?usr='.$usr.'"</script>';
+			window.location = "./tableau_de_bord.php?usr='.$_SESSION['login'].'"</script>';
 			
 			//echo "<p>Cliquez <a href='./profil_mentor.php'> ici </a> pour acceder a votre profil</p>
 			//	<br><p>Cliquez <a href='./ajout_annonce.php?usr=".$usr."'> ici </a> pour ajouter une annonce</p>";

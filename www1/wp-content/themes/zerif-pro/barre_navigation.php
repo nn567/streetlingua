@@ -74,6 +74,11 @@ overflow: hidden;
     }
 }
 </style>
+   <?php 
+   session_start();
+   //$_SESSION['login']=$_GET['usr'];
+   include "connexion_include.php";
+   ?>
 
 <nav class="navbar navbar-inverse" role="navigation">
   <div class="container-fluid">
@@ -132,50 +137,11 @@ overflow: hidden;
                                         </ul>
 										</ul>
 										
-	<?php if (isset($_GET['c']) && ($_GET['c']==false)) echo'									
-	<ul class="nav navbar-nav navbar-right" style="margin-right: 15px" >
-                                    <li class="dropdown">
-									<a href="#" class="dropdown-toggle" data-toggle="dropdown">Mon Profil
-                                        <b class="caret"></b></a> 
-                                        <ul class="dropdown-menu">
-                                            <li>
-                                                <div class="navbar-content">
-                                                    <div class="row">
-                                                        <div class="col-md-5">
-                                                            <img src="http://placehold.it/120x120"
-                                                                alt="Alternate Text" class="img-responsive" />
-                                                            <p class="text-center small">
-                                                                <a href="#">Changer Photo</a></p>
-                                                        </div>
-                                                        <div class="col-md-7">
-                                                            <span>Nom Prenom</span>
-                                                            <p class="text-muted small">
-                                                                mail@gmail.com</p>
-                                                            <div class="divider">
-                                                            </div>
-                                                            <a href="#" class="btn btn-primary btn-sm active">Voir Profil</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="navbar-footer">
-                                                    <div class="navbar-footer-content">
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <a href="#" class="btn btn-default btn-sm">Changer mdp</a>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <a href="http://www.jquery2dotnet.com" class="btn btn-default btn-sm pull-right">Deconnexion</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-											
-                                        </ul>
-										</ul>';
-	else //if (isset($_GET['usr'])
-                echo ' <ul class="nav navbar-nav navbar-right">
-        <?php include "connexion_include.php";?>
+	<?php if (!isset($_SESSION['login'])) {
+	
+echo 
+	' <ul class="nav navbar-nav navbar-right">
+
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Connexion</b> <span class="caret"></span></a>
 			<ul id="login-dp" class="dropdown-menu">
@@ -207,10 +173,63 @@ overflow: hidden;
 				</li>
 			</ul>
         </li>
-      </ul>';?>
+	</ul>'; }
+	
+	else {
+                echo ' 								
+	<ul class="nav navbar-nav navbar-right" style="margin-right: 15px" >
+                                    <li class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown">Mon Profil
+                                        <b class="caret"></b></a> 
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <div class="navbar-content">
+                                                    <div class="row">
+                                                        <div class="col-md-5">
+                                                            <img src="http://placehold.it/120x120"
+                                                                alt="Alternate Text" class="img-responsive" />
+                                                            <p class="text-center small">
+                                                                <a href="#">Changer Photo</a></p>
+                                                        </div>
+                                                        <div class="col-md-7">
+                                                            <span>Nom Prenom</span>
+                                                            <p class="text-muted small">
+                                                                mail@gmail.com</p>
+                                                            <div class="divider">
+                                                            </div>
+                                                            <a href="#" class="btn btn-primary btn-sm active">Voir Profil</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="navbar-footer">
+                                                    <div class="navbar-footer-content">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <a href="#" class="btn btn-default btn-sm">Changer mdp</a>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <form action="deconnexion.php" method="POST" >
+																<input type="submit" class="btn btn-default btn-sm pull-right" value="Deconnexion"/>
+																</form>
+																
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+											
+                                        </ul>
+	</ul>
+	
+	';
+	}?>
 										
  </div>
  
   </div>
   
 </nav>
+
+<script>
+deconnexion.addEventListener(deconnexion(),click);
+</script>

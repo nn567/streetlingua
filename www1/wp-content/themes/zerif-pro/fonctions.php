@@ -4,7 +4,7 @@
 	// connexion à la BD
 	function connectBD() {
 		global $connexion;		
-		$connexion = mysqli_connect(SERVEUR, UTILISATEURICE, MOTDEPASSE, BDD);
+		$connexion = mysqli_connect('localhost', 'user', 'password', 'wp_database');
 		if (mysqli_connect_errno()) {
 		    printf("Échec de la connexion : %s\n", mysqli_connect_error());
 		    exit();

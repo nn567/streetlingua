@@ -94,7 +94,6 @@
 
 
 <?php
- $connexion = mysqli_connect('localhost', 'user', 'password', 'wp_database');
 
  if (isset($_POST["ajout"]))
  {
